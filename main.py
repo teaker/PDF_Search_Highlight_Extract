@@ -1,5 +1,4 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QObject, pyqtSlot, QCoreApplication
 from mainwindow import Ui_MainWindow
 import sys
 from model import Model
@@ -8,13 +7,10 @@ from model import Model
 import PyPDF2
 import re
 import os
-import glob
 from pathlib import Path
 import fitz
 from io import FileIO
 from timeit import default_timer as timer
-
-import itertools
 
 
 class MainWindowUIClass(Ui_MainWindow):
@@ -42,8 +38,6 @@ class MainWindowUIClass(Ui_MainWindow):
         updated in the GUI.
         '''
         self.lineEdit.setText(self.model.getFileName())
-        # self.lineEdit_3.setText(self.model.getDirName())
-        # self.textEdit.setText( self.model.getFileContents() )
 
     def refreshAllOutFile(self):
         self.lineEdit_4.setText(self.model.getOutFileName())
@@ -65,7 +59,6 @@ class MainWindowUIClass(Ui_MainWindow):
         ''' Called when the user presses the Browse button
         '''
         options = QtWidgets.QFileDialog.Options()
-        # options |= QtWidgets.QFileDialog.DontUseNativeDialog
         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
             None,
             "Select PDF File",
@@ -90,9 +83,6 @@ class MainWindowUIClass(Ui_MainWindow):
             self.model.setOutFileName(outFileName)
             self.refreshAllOutFile()
 
-
-
-
     def PDFsearch(self):
         searchString = self.returnSearchTerms()
         wholeWord = self.returnWholeWordSearchTerms()
@@ -101,26 +91,18 @@ class MainWindowUIClass(Ui_MainWindow):
 
         searchList = re.compile(r'|'.join(wordList), re.IGNORECASE)
         wholeWordSearchList = re.compile(r'|'.join(wholeWordList), re.IGNORECASE)
-        #wholeWordSearchList = re.compile(r'|'.join(wholeWordList), re.IGNORECASE)
-        #wholeWordSearchList = r'\b(?:{})\b'.format('|'.join(wholeWordList))
-        #wholeWordSearchList = rf'\b(?:{"|".join(map(re.escape, wholeWordList))})\b'
 
         inputFile = self.model.getFileName()
         outputFile = self.model.getOutFileName()
         object2 = PyPDF2.PdfFileReader(FileIO(inputFile), strict=False)
 
         object = fitz.Document(inputFile)
-        # doc = fitz.open(docPath)
-        # numPages = doc.pageCount
-        # page = doc[0]
-
         NumPages = object.page_count
         output = PyPDF2.PdfFileWriter()
         foundPages = []
 
         # Do the search
         for i in range(0, NumPages):
-            # PageObj = object.getPage(i)
             PageObj = object[i]
             p = i + 1
             Text = PageObj.get_text()
@@ -162,7 +144,6 @@ class MainWindowUIClass(Ui_MainWindow):
 
         for i in range(0, numPages):
             page = doc[i]
-            #Text = page.get_text()
             Text_WordsOnly = page.get_text("words")
             for word in wordList:
                 text_instances = page.search_for(word, hit_max=100)
@@ -175,17 +156,6 @@ class MainWindowUIClass(Ui_MainWindow):
                         print(page, "word in ", text[4])
                         highlight = page.add_highlight_annot(text[0:4])
 
-            '''
-            for word in wholeWordSearchList:
-                text_instances = page.search_for(word, hit_max=100)
-                for inst in text_instances:
-                    print(page, inst, type(inst))
-                    highlight = page.add_highlight_annot(inst)
-            '''
-
-
-
-        # doc.save(docPath, garbage=4, deflate=True, clean=True)
         doc.saveIncr()
         self.debugPrint("-------------------------------------------------------")
         self.debugPrint("Finished.  File saved to " + str(docPath))

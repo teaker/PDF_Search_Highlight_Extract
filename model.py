@@ -35,9 +35,7 @@ class Model:
         '''
         if self.isValid(fileName):
             self.fileName = fileName
-            #self.fileContents = open(fileName, 'r').read()
         else:
-            #self.fileContents = ""
             self.fileName = ""
 
     def getFileName(self):

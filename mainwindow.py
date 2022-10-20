@@ -33,7 +33,6 @@ class Ui_MainWindow(QObject):
         self.debugTextBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.debugTextBrowser.setGeometry(QtCore.QRect(10, 301, 641, 241))
         self.debugTextBrowser.setObjectName("debugTextBrowser")
-
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(10, 80, 211, 61))
         font = QtGui.QFont()
@@ -44,8 +43,6 @@ class Ui_MainWindow(QObject):
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_2.setGeometry(QtCore.QRect(220, 100, 491, 31))
         self.lineEdit_2.setObjectName("lineEdit_2")
-        #BEGIN ADD LINE 3
-
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(10, 130, 211, 61))
         font = QtGui.QFont()
@@ -56,8 +53,6 @@ class Ui_MainWindow(QObject):
         self.lineEdit_3 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_3.setGeometry(QtCore.QRect(220, 150, 491, 31))
         self.lineEdit_3.setObjectName("lineEdit_3")
-
-        #END ADD LINE 3
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(10, 190, 221, 51))
         font = QtGui.QFont()
@@ -101,10 +96,8 @@ class Ui_MainWindow(QObject):
 
         self.retranslateUi(MainWindow)
         self.pushButton.clicked.connect(self.browseSlot)
-        #self.lineEdit.returnPressed.connect(self.returnPressedSlot)
         self.pushButton_2.clicked.connect(self.browseSaveFileSlot)
         self.pushButton_3.clicked.connect(self.runIt)
-        #self.pushButton_4.clicked.connect(MainWindow.close)
         self.pushButton_4.clicked.connect(self.exitProgramSlot)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
