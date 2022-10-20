@@ -109,7 +109,7 @@ class MainWindowUIClass(Ui_MainWindow):
             Text_WordsOnly = PageObj.get_text("words")
             self.debugPrint("Checking page " + str(p))
             QtWidgets.QApplication.processEvents()
-            if re.search(searchList, Text):
+            if len(wordList) != 0 and re.search(searchList, Text):
                 self.debugPrint("File: " + str(inputFile) + "  |  " + "Page: " + str(p))
                 foundPages.append(i)
             else:
