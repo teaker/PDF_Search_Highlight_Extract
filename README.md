@@ -14,5 +14,6 @@ For instance, entering "bot" into the second box would match **bot** but would n
 
 You can enter search terms into both boxes simultaneously.
 
-![image](https://user-images.githubusercontent.com/4950574/198332600-bfb8273e-3513-4782-98c0-71663a456de5.png)
+![alt text](https://github.com/teaker/PDF_Search_Highlight_Extract/blob/e488a57a74d6a0944dd9d7e28f253e3bb9aa2a9c/PDFsearch.jpg?raw=true)
+
 
